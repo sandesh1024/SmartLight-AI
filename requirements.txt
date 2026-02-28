@@ -1,7 +1,7 @@
 # =========================
 # Core AI
 # =========================
-torch==2.8.0
+torch>=2.9.0
 torchvision==0.23.0
 ultralytics==8.3.202
 
@@ -26,3 +26,4 @@ PyYAML==6.0.2
 psutil==7.1.0
 scipy==1.15.3
 networkx==3.4.2
+aiofiles==25.1.0

@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useState, useRef, useCallback } from "react";
 
 const TrafficContext = createContext();
-const WS_URL  = "ws://127.0.0.1:8000/ws";
-const API_URL = "http://127.0.0.1:8000";
+const BACKEND_HOST = window.location.hostname;
+const WS_URL  = `ws://${BACKEND_HOST}:8000/ws`;
+const API_URL = `http://${BACKEND_HOST}:8000`;
 
 export const getLevel = (total) => {
   if (total >= 50) return { label: "HIGH",   color: "#ef5350", bg: "rgba(239,83,80,0.12)",   emoji: "🔴", pulse: true  };

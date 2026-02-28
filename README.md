@@ -184,10 +184,10 @@ http://localhost:5173
 ## Action Space
 
 
-0 → North
-1 → South
-2 → East
-3 → West
+0 → North (N)
+1 → South (S)
+2 → East (E)
+3 → West (W)
 
 
 ## Reward Function

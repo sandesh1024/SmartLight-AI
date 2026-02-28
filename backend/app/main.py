@@ -9,7 +9,7 @@ from datetime import datetime
 import asyncio
 import os
 
-from backend.core.signal_manager import SignalManager
+from core.signal_manager import SignalManager
 
 app = FastAPI(title="Smart Traffic Control AI")
 

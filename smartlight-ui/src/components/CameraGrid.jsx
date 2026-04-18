@@ -9,9 +9,7 @@ function CamFeed({ dir, count, isActive, videoId }) {
   const [videoError, setVideoError] = useState(false);
 
   // videoId is like "lane3" → file is "video3.mp4"
-  const videoFile = videoId
-    ? `video${videoId.replace("lane", "")}.mp4`
-    : null;
+  const videoFile = videoId || null;
   const videoUrl = videoFile ? `${VIDEO_BASE}/${videoFile}` : null;
 
   const stripes = [0,1,2,3,4,5].map((i) => ({

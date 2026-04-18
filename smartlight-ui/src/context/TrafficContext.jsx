@@ -42,7 +42,7 @@ export const TrafficProvider = ({ children }) => {
         try {
           const data = JSON.parse(e.data);
           if (data && typeof data === "object" && Object.keys(data).length > 0) {
-            setTrafficData(data);
+            setTrafficData({...data});  // ← spread forces new reference = always re-renders
           }
         } catch (err) {
           console.error("WS parse error:", err);

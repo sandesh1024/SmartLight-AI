@@ -103,7 +103,7 @@ def reset_all():
 def optimize():
     for signal in manager.signals.values():
         if signal._cycle_ready:
-            signal._yolo_needed = {lane: True for lane in signal.lane_order}
+            signal._yolo_needed = {lane: True for lane in ['north','south','east','west']}
     return {"status": "optimization triggered"}
 
 
@@ -136,6 +136,43 @@ def get_notifications():
     return notifications_store
 
 
+# ADD THESE NEW ENDPOINTS to backend/app/main.py
+# (paste after the existing /notifications endpoints)
+
+# ── SYSTEM STATUS ────────────────────────────────────────────────────
+
+@app.get("/system/status")
+def system_status():
+    """Full system status: DQN stats, peak hour, coordination."""
+    return manager.get_system_status()
+
+@app.get("/system/peak")
+def peak_status():
+    """Current peak hour status and timing config."""
+    from backend.core.peak_detector import get_detector
+    return get_detector().get_status()
+
+@app.get("/system/coordination")
+def coordination_status():
+    """Current green wave coordination status."""
+    from backend.core.coordination import get_coordinator
+    return get_coordinator().get_status()
+
+@app.get("/system/dqn")
+def dqn_status():
+    """DQN agent stats for all 20 signals."""
+    from backend.core.dqn_agent import get_all_agent_stats
+    return get_all_agent_stats()
+
+@app.post("/system/dqn/save")
+def save_dqn():
+    """Manually save all DQN models."""
+    from backend.core.dqn_agent import save_all_agents
+    save_all_agents()
+    return {"status": "All DQN models saved"}
+
+
+
 # ── WebSocket ────────────────────────────────────────────────
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
@@ -149,3 +186,6 @@ async def websocket_endpoint(websocket: WebSocket):
         print("Frontend disconnected")
     except Exception as e:
         print("WebSocket error:", e)
+        
+        
+        

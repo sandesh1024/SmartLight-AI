@@ -10,7 +10,7 @@ export default function Sidebar({ open, onClose, addLog }) {
   const locations = Object.keys(signalsByLocation);
 
   const getStatusText = (sig) => {
-    if (!sig?.cycle_ready) return "⏳ Initializing...";
+    if (!sig?.phase) return "⏳ Initializing...";
     const lane  = sig.active_lane ?? "—";
     const timer = sig.timer ?? 0;
     const phase = sig.phase ?? "—";
